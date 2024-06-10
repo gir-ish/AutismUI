@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 0%;
+        }
+
+        h1 {
+            color: #000000;
+        }
+
+        button {
+            background-color: #40826D;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #40826D;
+        }
+
+        button:disabled {
+            background-color: #df5e5e;  
+            cursor: not-allowed;
+        }
+
+        #timer {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Recorder</h1>
+        <button id="startRecording">Start Recording</button>
+        <button id="stopRecording" disabled>Stop Recording</button>
+        <div id="timer">00:00</div>
+    </div>
+
+    <script>
+        let recorder;
+        let audioChunks = [];
+        let startTime;
+        let timerInterval;
+
+        function updateTime() {
+            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsedTime / 60);
+            const seconds = elapsedTime % 60;
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timer').textContent = formattedTime;
+        }
+
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                recorder = new MediaRecorder(stream);
+
+                recorder.ondataavailable = e => {
+                    audioChunks.push(e.data);
+                };
+
+                recorder.onstart = () => {
+                    startTime = Date.now();
+                    timerInterval = setInterval(updateTime, 1000);
+                };
+
+                recorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    const a = document.createElement('a');
+                    a.href = audioUrl;
+                    a.download = 'recorded_audio.wav';
+                    document.body.appendChild(a);
+                    a.click();
+
+                    // Reset
+                    audioChunks = [];
+                    clearInterval(timerInterval);
+                };
+            })
+            .catch(err => {
+                console.error('Permission to access microphone denied:', err);
+            });
+
+        document.getElementById('startRecording').addEventListener('click', () => {
+            recorder.start();
+            document.getElementById('startRecording').disabled = true;
+            document.getElementById('stopRecording').disabled = false;
+            setTimeout(() => {
+                recorder.stop();
+                document.getElementById('startRecording').disabled = false;
+                document.getElementById('stopRecording').disabled = true;
+            }, 15000); // 15 seconds
+        });
+
+        document.getElementById('stopRecording').addEventListener('click', () => {
+            recorder.stop();
+            document.getElementById('startRecording').disabled = false;
+            document.getElementById('stopRecording').disabled = true;
+        });
+    </script>
+</body>
+</html>
+<!-- 
+(tf) C:\Users\giris>ffmpeg -i C:\Users\giris\Downloads\recorded_audio.wav -acodec pcm_s16le -ar 16000 -ac 1 C:\Users\giris\Downloads\recorded_audio2.wav
+ -->
