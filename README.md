@@ -18,6 +18,10 @@ To use this project, follow the installation steps below:
 1. Clone the repository:
    ```bash
    git clone https://github.com/gir-ish/AutismUI.git
-   '''install requirements.txt'''
+   ```
+   
+   #install requirements.txt
+   
+   ```bash
    ./install_requirements.sh
-
+   ```
