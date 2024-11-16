@@ -1,13 +1,10 @@
 # Project Title
 AUTISM DETECTIO FROM VOICE 
 
-## Description
-
-Provide a brief description of your project here. For example, describe its purpose, functionality, and any notable features.
 
 ## Access the File
 
-You can access the file using the following link:
+You can access the model using the following link:
 
 [Download the File](https://drive.google.com/file/d/1Q8DwjPlIaD1S5snh4hNINLt0NdHlYhd0/view?usp=sharing)
 
@@ -20,8 +17,8 @@ To use this project, follow the installation steps below:
    git clone https://github.com/gir-ish/AutismUI.git
    ```
    
-   #install requirements.txt
-   
+   ## install requirements.txt
+
    ```bash
    ./install_requirements.sh
    ```
