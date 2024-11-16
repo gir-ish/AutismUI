@@ -1,4 +1,5 @@
 # Project Title
+AUTISM DETECTIO FROM VOICE 
 
 ## Description
 
@@ -16,5 +17,7 @@ To use this project, follow the installation steps below:
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/gir-ish/AutismUI.git
+   '''install requirements.txt'''
+   ./install_requirements.sh
 
