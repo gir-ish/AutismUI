@@ -1,5 +1,5 @@
-# Project Title
-AUTISM DETECTIO FROM VOICE 
+# AUTISM DETECTION FROM VOICE 
+
 
 
 ## Access the File
