@@ -22,3 +22,6 @@ To use this project, follow the installation steps below:
    ```bash
    ./install_requirements.sh
    ```
+   ```bash
+   streamlit run app.py
+   ```
