@@ -80,7 +80,9 @@ streamlit run app.py
 
 For direct access to the pre-trained model and other resources, use this link:  
 **[Download the File](https://drive.google.com/file/d/1Q8DwjPlIaD1S5snh4hNINLt0NdHlYhd0/view?usp=sharing)**
-
+---
+# change the path of model in app.py 
+---
 ---
 
 ## **How It Works**
