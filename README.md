@@ -1,13 +1,7 @@
 # AUTISM DETECTION FROM VOICE 
 
 
-
-## Access the File
-
-You can access the model using the following link:
-
-[Download the File](https://drive.google.com/file/d/1Q8DwjPlIaD1S5snh4hNINLt0NdHlYhd0/view?usp=sharing)
-
+--- 
 ## Installation
 To use this project, you can either:
 
